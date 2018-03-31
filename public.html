@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no"">
+        <style>
+            #myform{
+                position:fixed;
+            }
+            #messages{
+                background-color:gray;
+                padding:5px;
+                border-radius:10px;
+                height:100px;
+            }
+        </style>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io();
+            function msg(check){
+                alert(socket.id);
+                socket.emit('msgrec',document.forms['myform'].elements['mymsg'].value,check);
+                document.getElementById('mymsg').value='';
+            }
+            socket.on('msgrec', function(msg,username,check_in){
+                var div_m = document.createElement('div');
+                if(check_in!=1){div_m.innerHTML=username + " " + msg;}
+                else{
+                    div_m.innerHTML=username+"Has entered the Chatroom";
+                }
+                document.getElementById('messages').appendChild(div_m);
+            });
+        </script>
+    </head>
+    <body onload=msg(1)>
+        <form id="myform">
+            <input type="text" id="mymsg">
+            <input type="button" value="Send" onclick="msg(0)">
+            <div id="messages"></div>
+        </form>
+    </body>
+</html>

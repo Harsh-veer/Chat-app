@@ -1,0 +1,89 @@
+<html>
+	<head>
+		<title>ChooseYourAvatar</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src="/socket.io/socket.io.js"></script>
+		<script>
+            var socket = io();
+			function change1(){
+				document.getElementById("avatar").style.backgroundImage = "url('/avatar1.png')";
+			}
+			function change2(){
+				document.getElementById("avatar").style.backgroundImage = "url('/avatar2.png')";
+			}
+			function change3(){
+				document.getElementById("avatar").style.backgroundImage = "url('/avatar3.png')";
+			}
+			function change4(){
+				document.getElementById("avatar").style.backgroundImage = "url('/avatar4.png')";
+			}
+			function change5(){
+				document.getElementById("avatar").style.backgroundImage = "url('/avatar5.png')";
+			}
+			function change6(){
+				document.getElementById("avatar").style.backgroundImage = "url('/avatar6.png')";
+			}
+            function sbmt(){
+                socket.emit('sbmtd', document.getElementById('name').value);
+                document.getElementById('name').value = '';
+            }
+		</script>
+		<style>
+            body{
+                background-color:white;
+            }
+			#avatar{
+				margin:auto;
+				width:130px;
+				height:130px;
+				background-color:gray;
+				background-image:url("");
+				border-radius:50%;
+			}
+			#thumbnails{
+				margin-top:20px;
+				text-align:center;
+			}
+			#name_cont{
+				margin:auto;
+				margin-top:20px;
+				text-align:center;
+				color:darkgrey;
+				font-family:'Robot' Sans serif;
+				font-size:120%;
+			}
+			#name{
+				border-width:0px 0px 1px 0px;
+				margin-left:10px;
+				margin-top:10px;
+				border-bottom-color:darkgrey;
+				font-family:'Robot' Sans serif;
+				font-size:105%;
+				text-align:center;
+			}
+			#name:focus{
+				outline:none;
+				border-bottom-color:black;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="cont">
+			<div id="avatar"></div>
+			<div id="thumbnails">
+				<img src="/avatar1.png" width="30px" height="30px" onclick="change1()">
+				<img src="/avatar2.png" width="30px" height="30px" onclick="change2()">
+				<img src="/avatar3.png" width="30px" height="30px" onclick="change3()">
+				<img src="/avatar4.png" width="30px" height="30px" onclick="change4()">
+				<img src="/avatar5.png" width="30px" height="30px" onclick="change5()">
+				<img src="/avatar6.png" width="30px" height="30px" onclick="change6()">
+				<br/>
+			</div>
+			<div id="name_cont">
+                Name<br/>
+                <input type="text" id="name">
+                <a href="/public.html"><img src="/submit.png" width="20px" height="20px" onclick="sbmt()"></a>
+            </div>
+		</div>
+	</body>
+</html>

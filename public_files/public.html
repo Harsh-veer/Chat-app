@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            #myform{
+                position:fixed;
+            }
+            #mymsg{
+                border-width:0px 0px 1px 0px;
+				margin-left:10px;
+				border-bottom-color:darkgrey;
+				font-family:'Robot' Sans serif;
+				font-size:105%;
+				text-align:center;
+                align-self: center;
+            }
+            #mymsg:focus{
+                outline:none;
+            }
+            #sbmtbt{
+                border-radius:10px;
+                border-width:0px;
+                padding:10px;
+                color:white;
+                background-image: url('/submit.png');
+            }
+            #sbmtbt:focus{
+                outline:none;
+            }
+            #mssgs{
+                font-family:'Robot' Sans serif;
+            }
+        </style>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io();
+            function msg(){
+                socket.emit('msgrec',document.getElementById('mymsg').value);
+                document.getElementById('mymsg').value='';
+            }
+            socket.on('msgrec', function(msg, username){
+                var div = document.createElement('div');
+                div.innerHTML=username+ ' : ' + msg;
+                var g = document.getElementById('messages').appendChild(div);
+                g.id = 'mssgs';
+            });
+        </script>
+    </head>
+    <body>
+        <input type="text" id="mymsg">
+        <img src="/submit.png" width="20px" height="20px" onclick="msg()">
+        <div id="messages"></div>
+    </body>
+</html>
